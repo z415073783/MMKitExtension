@@ -14,9 +14,14 @@ public enum NavigationBarColorType {
 }
 
 open class MMBaseViewController: MMViewController {
+    
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
+    }
+    
     open override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
+        
     }
 
     open override func viewWillAppear(_ animated: Bool) {
