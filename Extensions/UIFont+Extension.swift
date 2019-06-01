@@ -19,7 +19,7 @@ extension UIFont {
             autoSize = fontSize + 2
         }
         
-        if let font = UIFont(name: MMkFontTextDefault, size: autoSize) {
+        if let font = UIFont(name: mm_kFontTextDefault, size: autoSize) {
             return font
         }
         
@@ -36,7 +36,7 @@ extension UIFont {
             autoSize = fontSize + 2
         }
         
-        if let font = UIFont(name: MMkFontTextDefaultBold, size: autoSize) {
+        if let font = UIFont(name: mm_kFontTextDefaultBold, size: autoSize) {
             return font
         }
         
@@ -53,7 +53,7 @@ extension UIFont {
             autoSize = fontSize + 2
         }
         
-        if let font = UIFont(name: MMkFontTextDefaultLight, size: autoSize) {
+        if let font = UIFont(name: mm_kFontTextDefaultLight, size: autoSize) {
             return font
         }
         

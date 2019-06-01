@@ -14,7 +14,7 @@ public extension UIButton {
      - parameter target: target
      - parameter action: action
      */
-    func MMaddtarget(_ target: AnyObject?, action: Selector) {
+    func mm_addtarget(_ target: AnyObject?, action: Selector) {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: target, action: action)
         addGestureRecognizer(tap)
     }

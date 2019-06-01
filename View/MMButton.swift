@@ -39,8 +39,8 @@ open class MMButton: UIButton {
         _touchUpInsideCallback = block
         addTarget(self, action: #selector(selfDidTap(_:)), for: .touchUpInside)
     }
-    private var _touchLongPressCallback:MMCallBlockFunc?
-    public func setTouchLongPressCallBack(block: @escaping MMCallBlockFunc) {
+    private var _touchLongPressCallback:mm_CallBlockFunc?
+    public func setTouchLongPressCallBack(block: @escaping mm_CallBlockFunc) {
         _touchLongPressCallback = block
         addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longTouchInside(sender:))))
     }

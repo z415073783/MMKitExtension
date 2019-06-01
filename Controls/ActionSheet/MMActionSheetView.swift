@@ -10,7 +10,7 @@ import UIKit
 
 public class MMActionSheetView: MMView {
 
-    var touchBlock: MMCallBlockFuncInt?
+    var touchBlock: mm_CallBlockFuncInt?
     lazy var backgroundView: MMView = {
         let zView = MMView()
         zView.backgroundColor = UIColor.white
@@ -30,7 +30,7 @@ public class MMActionSheetView: MMView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public class func show(list: [String], title: String? = nil, cancel: String? = MMLanguage.localized("Cancel"), MMCallBlock: @escaping MMCallBlockFuncInt) {
+    public class func show(list: [String], title: String? = nil, cancel: String? = MMLanguage.localized("Cancel"), MMCallBlock: @escaping mm_CallBlockFuncInt) {
         let `self` = MMActionSheetView()
         
         guard let rootVC = kRootViewController, let window = kAppWindow else { return }

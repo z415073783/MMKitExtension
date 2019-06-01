@@ -25,7 +25,7 @@ public class SystemCalendarManager: NSObject {
                     event.title = "测试"
                     event.location = "厦门"
                     //起止时间
-                    let formatter = MMDateFormatter()
+                    let formatter = mm_DateFormatter()
                     formatter.dateFormat = "yyyy-MM-dd HH:mm"
                     let startTime = formatter.date(from: "2017-04-20 20:00") ?? Date()
                     let endTime = formatter.date(from: "2017-04-20 21:00") ?? Date()

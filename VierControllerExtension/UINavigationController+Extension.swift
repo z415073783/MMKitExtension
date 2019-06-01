@@ -10,17 +10,17 @@ import UIKit
 
 public extension UINavigationController {
     
-    func MMpushViewController(_ viewController: UIViewController, animated: Bool) {
-        if ((topViewController?.MMclassName() == viewController.MMclassName()) == false) {
+    func mm_pushViewController(_ viewController: UIViewController, animated: Bool) {
+        if ((topViewController?.mm_className() == viewController.mm_className()) == false) {
             viewController.hidesBottomBarWhenPushed = true
             pushViewController(viewController, animated: animated)
         }
     }
 
-    func MMpushViewControllerFromTop(_ viewController: UIViewController, animated: Bool) {
-        if ((topViewController?.MMclassName() == viewController.MMclassName()) == false) {
+    func mm_pushViewControllerFromTop(_ viewController: UIViewController, animated: Bool) {
+        if ((topViewController?.mm_className() == viewController.mm_className()) == false) {
             let transition = CATransition.init()
-            transition.duration = MMkNavigationPushActionDuration
+            transition.duration = mm_kNavigationPushActionDuration
             transition.type = CATransitionType.reveal
             transition.subtype = CATransitionSubtype.fromBottom
             self.view.layer.add(transition, forKey: "")
@@ -37,7 +37,7 @@ public extension UINavigationController {
     func pushCustomAnimationViewController(_ viewController: UIViewController, animationType: CustomAnimationPushVCType) {
 //        MMLOG.debug("viewController.className() = \(viewController.className())")
 
-        if ((topViewController?.MMclassName() == viewController.MMclassName()) == false) {
+        if ((topViewController?.mm_className() == viewController.mm_className()) == false) {
             viewController.hidesBottomBarWhenPushed = true
 //            let transition = CATransition()
 //            transition.duration = kNavigationPushActionDuration
@@ -65,11 +65,11 @@ public extension UINavigationController {
     }
 
     @discardableResult
-    func MMpopViewControllerAnimated(_ animated: Bool) -> UIViewController? {
+    func mm_popViewControllerAnimated(_ animated: Bool) -> UIViewController? {
         return popViewController(animated: animated)
     }
     //推出到起始页
-    func MMpopToRootViewControllerAnimated(_ animated: Bool) -> [UIViewController]? {
+    func mm_mm_popToRootViewControllerAnimated(_ animated: Bool) -> [UIViewController]? {
 //
         let list = navigationController?.popToRootViewController(animated: animated)
 //        navigationController?.setNavigationBarHidden(false, animated: animated)

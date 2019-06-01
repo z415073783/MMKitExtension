@@ -52,7 +52,7 @@ public class MMAlertNoButtonView: UIView {
     ///   - block: 消失返回
     class public func show(_ title: String, position: AlertNoButtonView_Position = .center, block: CallFunc? = nil) {
         
-        MMexecuteOnMainThread {
+        mm_executeOnMainThread {
             guard let window = MMWindowManager.shared.topestWindow() else { return }
             
             let alertView = window.viewWithTag(MMAlertViewTag)
@@ -113,7 +113,7 @@ public class MMAlertNoButtonView: UIView {
         }else {
             titleLabel.text = title
         }
-        titleLabel.font = UIFont.fontWithHelvetica(MMkFontSizeMedium)
+        titleLabel.font = UIFont.fontWithHelvetica(mm_kFontSizeMedium)
         titleLabel.textColor = UIColor.white
         addSubview(titleLabel)
 
@@ -170,12 +170,12 @@ public class MMAlertNoButtonView: UIView {
             return
         }
 
-        Timer.MMscheduledTimer(withTimeInterval: 3, repeats: false, block: { [weak self] (_) in
+        Timer.mm_scheduledTimer(withTimeInterval: 3, repeats: false, block: { [weak self] (_) in
             self?.endAction()
         })
     }
     fileprivate func endAction(block: CallFunc? = nil) {
-        UIView.animate(withDuration: MMkActionDuration, delay: 0, options: UIView.AnimationOptions.layoutSubviews, animations: { [weak self] in
+        UIView.animate(withDuration: mm_kActionDuration, delay: 0, options: UIView.AnimationOptions.layoutSubviews, animations: { [weak self] in
             self?.alpha = 0
         }) { [weak self] (_) in
             self?.removeFromSuperview()

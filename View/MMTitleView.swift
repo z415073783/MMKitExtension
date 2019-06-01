@@ -35,15 +35,15 @@ open class MMTitleView: UIView {
     }
 
     open func initView(title: String, subTitle: String) {
-        let rect = title.boundingRect(with: CGSize(width: Int(kScreenWidth), height: 30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.fontWithHelvetica(MMkFontSizeLargest)], context: nil)
+        let rect = title.boundingRect(with: CGSize(width: Int(kScreenWidth), height: 30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.fontWithHelvetica(mm_kFontSizeLargest)], context: nil)
         _title.text = title
         _title.textColor = UIColor.white
-        _title.font = UIFont.fontWithHelvetica(MMkFontSizeLargest)
+        _title.font = UIFont.fontWithHelvetica(mm_kFontSizeLargest)
         self.addSubview(_title)
 
         _subtitle.text = subTitle
         _subtitle.textColor = UIColor.white
-        _subtitle.font = UIFont.fontWithHelvetica(MMkFontSizeSmall)
+        _subtitle.font = UIFont.fontWithHelvetica(mm_kFontSizeSmall)
         self.addSubview(_subtitle)
         _title.snp.makeConstraints { (make) in
             make.centerX.equalTo(self)

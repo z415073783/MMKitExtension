@@ -98,13 +98,13 @@ public class MMTopAlertView: UIView {
 
     private func beginAction() {
         poppingAction()
-        Timer.MMscheduledTimer(withTimeInterval: 3, repeats: false, block: { [weak self] (_) in
+        Timer.mm_scheduledTimer(withTimeInterval: 3, repeats: false, block: { [weak self] (_) in
             self?.endAction()
         })
     }
     private func endAction() {
         
-        UIView.animate(withDuration: MMkActionDuration, delay: 0, options: UIView.AnimationOptions.layoutSubviews, animations: { [weak self] in
+        UIView.animate(withDuration: mm_kActionDuration, delay: 0, options: UIView.AnimationOptions.layoutSubviews, animations: { [weak self] in
             self?.alpha = 0
         }) { [weak self] (_) in
             self?.removeFromSuperview()

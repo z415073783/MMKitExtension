@@ -117,14 +117,14 @@ public class MMKeyBoardTouchManager: UIView {
 // MARK: 对外接口
     public class func addView(view: UIView) {
         let holder = ViewHolder(view)
-        MMKeyBoardTouchManager.getInstance.listenQueue[view.MMgetAddressIdentifity()] = holder
+        MMKeyBoardTouchManager.getInstance.listenQueue[view.mm_getAddressIdentifity()] = holder
     }
 // 保证唯一
 
 
     public class func removeView(view: UIView) {
         let holder = ViewHolder(view)
-        MMKeyBoardTouchManager.getInstance.listenQueue[view.MMgetAddressIdentifity()] = holder
+        MMKeyBoardTouchManager.getInstance.listenQueue[view.mm_getAddressIdentifity()] = holder
     }
     public class func updateView() {
         MMKeyBoardTouchManager.getInstance.setupView()

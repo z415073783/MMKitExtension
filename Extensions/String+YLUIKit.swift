@@ -49,7 +49,7 @@ extension String {
     /// - Returns:
     public func adjustParamsOrder(arguments: CVarArg...) -> String {
         let dataStr = NSMutableString(string: self)
-        let resultList = self.MMregularExpressionData(pattern: "\\^[0-9]*\\$")
+        let resultList = self.mm_regularExpressionData(pattern: "\\^[0-9]*\\$")
         var sortList: [OrderSortModel] = []
         for result in resultList {
             let range = result.range

@@ -24,7 +24,7 @@ public class MMWindowManager: NSObject {
     
     // 注册app中主动生成的window
     public func registerWindow(_ window: UIWindow) {
-        MMexecuteOnMainThread {
+        mm_executeOnMainThread {
             for (_, holder) in self.windowHolderArray.enumerated() {
                 if holder.window == window {
                     return
@@ -38,7 +38,7 @@ public class MMWindowManager: NSObject {
     
     // 反注册app中主动生成的window
     public func unregisterWindow(_ window: UIWindow) {
-        MMexecuteOnMainThread {
+        mm_executeOnMainThread {
             var hitHolder: WindowHolder?
             for (_, holder) in self.windowHolderArray.enumerated() {
                 if holder.window == window {

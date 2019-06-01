@@ -147,7 +147,7 @@ public extension UIView {
     //弹出动画
     func poppingAction() {
         let anim = CAKeyframeAnimation(keyPath: "transform.scale")
-        anim.duration = MMkActionDuration
+        anim.duration = mm_kActionDuration
         anim.values = [0, 1.2, 0.9, 1]
         anim.repeatCount = 1
         layer.add(anim, forKey: "transform.scale")
@@ -155,17 +155,17 @@ public extension UIView {
     /**
      淡入
      */
-    func fadeInAction(time: TimeInterval = MMkActionDuration) {
+    func fadeInAction(time: TimeInterval = mm_kActionDuration) {
         alpha = 0
-        UIView.animate(withDuration: MMkActionDuration, animations: {[weak self] in
+        UIView.animate(withDuration: mm_kActionDuration, animations: {[weak self] in
             self?.alpha = 1
         })
     }
     /**
      淡出
      */
-    func fadeOutAction(isRemove: Bool = true, time: TimeInterval = MMkActionDuration,completionBlock:(()->Void)? = nil) -> Void{
-        UIView.animate(withDuration: MMkActionDuration, animations: { [weak self] in
+    func fadeOutAction(isRemove: Bool = true, time: TimeInterval = mm_kActionDuration,completionBlock:(()->Void)? = nil) -> Void{
+        UIView.animate(withDuration: mm_kActionDuration, animations: { [weak self] in
             self?.alpha = 0
             }, completion: { [weak self](final) in
                 if isRemove {
@@ -190,7 +190,7 @@ public extension UIView {
      滑入
      - parameter position: 目标点
     */
-    func sliderInActionWithTime(_ position: CGPoint, time: TimeInterval = MMkActionDuration) {
+    func sliderInActionWithTime(_ position: CGPoint, time: TimeInterval = mm_kActionDuration) {
         UIView.animate(withDuration: time, animations: { [weak self] in
             self?.transform = CGAffineTransform(translationX: position.x, y: position.y)
         })
@@ -203,7 +203,7 @@ public extension UIView {
      */
     func sliderInAction(position: CGPoint, completionBlock:(() -> Void)? = nil) {
         
-        UIView.animate(withDuration: MMkActionDuration, animations: { [weak self] in
+        UIView.animate(withDuration: mm_kActionDuration, animations: { [weak self] in
             self?.transform = CGAffineTransform(translationX: position.x, y: position.y)
             }, completion: { (_) in
                 completionBlock?()
@@ -214,7 +214,7 @@ public extension UIView {
      */
     func sliderOutAction(completionBlock:(() -> Void)? = nil) {
         
-        UIView.animate(withDuration: MMkActionDuration, animations: { [weak self] in
+        UIView.animate(withDuration: mm_kActionDuration, animations: { [weak self] in
             self?.transform = CGAffineTransform(translationX: 0, y: 0)
             }, completion: { (_) in
                 completionBlock?()

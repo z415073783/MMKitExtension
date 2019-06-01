@@ -61,7 +61,7 @@ public class MMMenuView: UIView {
         return button
     }
 
-    public func show(list: [MMMenuModel], superView: UIView, touchBlock: @escaping MMCallBlockFuncInt) {
+    public func show(list: [MMMenuModel], superView: UIView, touchBlock: @escaping mm_CallBlockFuncInt) {
 
         guard let rootView = kRootViewController?.view else {
             return
