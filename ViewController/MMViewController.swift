@@ -180,95 +180,33 @@ open class MMViewController: UIViewController {
     @objc open func returnCurrentController(_ sender: UIButton? = nil) {
         _ = navigationController?.popViewController(animated:true)
     }
-    //导航栏返回和关闭键
-    open func addLeftReturnAndCloseButton(text: String, _ type: MMNavigationbarTitleType = MMNavigationbarTitleType.blue) {
-        let backTitle = MMLanguage.localized("返回")
-        let rightButton = UIButton.init(type: UIButton.ButtonType.custom)
-//        rightButton.accessibilityIdentifier = "com.yealink.videophone:id/title_rl_left"
-        rightButton.setTitle(backTitle, for: UIControl.State.normal)
-        rightButton.titleLabel?.font = UIFont.fontWithHelvetica(mm_kFontSizeLarge)
-        rightButton.setTitleColor(type.getColor(), for: .normal)
-        let image: UIImage = UIImage.init(named: getReturnImageName(type: type))!
-        rightButton.setImage(image, for: UIControl.State.normal)
-//        rightButton.addtargetYL(self, action: #selector(closeCurrentController))
-        rightButton.addTarget(self, action: #selector(closeCurrentController), for: .touchUpInside)
-        var rect = backTitle.boundingRect(with: CGSize(width: 120, height: 44), options: NSStringDrawingOptions.usesFontLeading, attributes: [NSAttributedString.Key.font: rightButton.titleLabel?.font ?? mm_kFontSizeLarge], context: nil)
-        rightButton.frame = CGRect(x: 0, y: 0, width: rect.size.width + 14, height: 44)
-        rightButton.contentHorizontalAlignment = .left
-        rightButton.sizeToFit()
-        let barBT: UIBarButtonItem = UIBarButtonItem.init(customView: rightButton)
 
-        let rightButton2 = UIButton.init(type: UIButton.ButtonType.custom)
-//        rightButton2.accessibilityIdentifier = "com.yealink.videophone:id/title_rl_left2"
-        rightButton2.setTitle(text, for: UIControl.State.normal)
-//        rightButton2.addtargetYL(self, action: #selector(returnCurrentController))
-        rightButton2.addTarget(self, action: #selector(returnCurrentController), for: .touchUpInside)
-        rightButton2.setTitleColor(type.getColor(), for: UIControl.State.normal)
-        rightButton2.setTitleColor(UIColor.lightGray, for: UIControl.State.highlighted)
-        rightButton2.titleLabel?.font = UIFont.fontWithHelvetica(mm_kFontSizeLarge)
-        rect = text.boundingRect(with: CGSize(width: 1000, height: 44), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.fontWithHelvetica(mm_kFontSizeLarge)], context: nil)
-        if rect.size.width<40 {
-            rect.size.width = 40
+    
+    open func changeNavigationBarColor(type: NavigationBarColorType) {
+        let image: UIImage?
+        switch type {
+        case .main:
+            let color = UIColor.mainColor
+            image = UIImage.imageWithColor(color: color)
+            navigationController?.navigationBar.isTranslucent = false
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            
+        case .white:
+            let color = UIColor.white
+            image = UIImage.imageWithColor(color: color)
+            navigationController?.navigationBar.isTranslucent = false
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.textBlackColor]
+        case .black:
+            let color = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+            image = UIImage.imageWithColor(color: color)
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         }
-        rightButton2.frame = CGRect(x: 0, y: 0, width: rect.size.width, height: 44)
-        rightButton2.contentHorizontalAlignment = .left
-        rightButton2.sizeToFit()
-        let barBT2: UIBarButtonItem = UIBarButtonItem.init(customView: rightButton2)
-        barBT.accessibilityIdentifier = "com.yealink.videophone:id/title_rl_left"
-        barBT2.accessibilityIdentifier = "com.yealink.videophone:id/title_rl_leftClose"
-        navigationItem.setLeftBarButtonItems([barBT, barBT2], animated: true)
+        guard let _image = image else {
+            return
+        }
+        self.navigationController?.navigationBar.setBackgroundImage(_image, for: .default)
     }
-
-    //创建图片+文字返回按钮
-    @discardableResult public func addLeftReturnAndTitleButton(_ type: MMNavigationbarTitleType = MMNavigationbarTitleType.blue, _ hideText: Bool = false, _ hideImage: Bool = false, _ titleText: String? = nil, _ imageName: String? = nil) -> UIButton {
-        navigationItem.leftBarButtonItem = nil
-
-        let rightButton = UIButton.init(type: UIButton.ButtonType.custom)
-//        rightButton.accessibilityIdentifier = "com.yealink.videophone:id/title_rl_left"
-        var newhideText = ""
-        if hideText == false {
-            newhideText = (titleText == nil ? MMLanguage.localized("Back") : titleText ?? "")
-            rightButton.setTitle(newhideText, for: UIControl.State.normal)
-            rightButton.titleLabel?.font = UIFont.fontWithHelvetica(mm_kFontSizeLarge)
-            switch type {
-            case .white:
-
-                rightButton.setTitleColor(UIColor.white, for: .normal)
-            case .black:
-
-                rightButton.setTitleColor(UIColor.black, for: .normal)
-            case .blue:
-                rightButton.setTitleColor(UIColor.textBlueColor, for: .normal)
-            }
-        }
-        if hideImage == false, let image = UIImage.init(named: imageName == nil ? getReturnImageName(type: type) : imageName ?? "" ) {
-            rightButton.setImage(image, for: UIControl.State.normal)
-        }
-        rightButton.addTarget(self, action: #selector(closeCurrentController), for: .touchUpInside)
-//        rightButton.addtargetYL(self, action: #selector(closeCurrentController))
-       
-        
-//        var rect = newhideText.boundingRect(with: CGSize(width: 1000, height: 44), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.fontWithHelvetica(kFontSizeLarge)], context: nil)
-//        if rect.size.width < 40 {
-//            rect.size.width = 40
-//        }
-//
-//        if let width = rightButton.imageView?.image?.size.width {
-//            rect.size.width = rect.size.width + width
-//        }
-//        rightButton.frame = rect
-        
-
-        rightButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
-        rightButton.sizeToFit()
-        let barBT: UIBarButtonItem = UIBarButtonItem.init(customView: rightButton)
-
-        barBT.accessibilityIdentifier = "com.yealink.videophone:id/title_rl_left"
-       navigationItem.leftBarButtonItem = barBT
-
-        return rightButton
-    }
-
+    
 
 
     deinit {
@@ -297,5 +235,107 @@ public extension MMViewController {
             imageName = "NavigationBarReturn_White"
         }
         return imageName
+    }
+}
+
+fileprivate typealias __NavigationButton = MMViewController
+public extension __NavigationButton {
+    //导航栏返回和关闭键
+    open func addLeftReturnAndCloseButton(text: String, _ type: MMNavigationbarTitleType = MMNavigationbarTitleType.blue) {
+        let backTitle = MMLanguage.localized("返回")
+        let rightButton = UIButton.init(type: UIButton.ButtonType.custom)
+        //        rightButton.accessibilityIdentifier = "com.yealink.videophone:id/title_rl_left"
+        rightButton.setTitle(backTitle, for: UIControl.State.normal)
+        rightButton.titleLabel?.font = UIFont.fontWithHelvetica(mm_kFontSizeLarge)
+        rightButton.setTitleColor(type.getColor(), for: .normal)
+        let image: UIImage = UIImage.init(named: getReturnImageName(type: type))!
+        rightButton.setImage(image, for: UIControl.State.normal)
+        //        rightButton.addtargetYL(self, action: #selector(closeCurrentController))
+        rightButton.addTarget(self, action: #selector(closeCurrentController), for: .touchUpInside)
+        var rect = backTitle.boundingRect(with: CGSize(width: 120, height: 44), options: NSStringDrawingOptions.usesFontLeading, attributes: [NSAttributedString.Key.font: rightButton.titleLabel?.font ?? mm_kFontSizeLarge], context: nil)
+        rightButton.frame = CGRect(x: 0, y: 0, width: rect.size.width + 14, height: 44)
+        rightButton.contentHorizontalAlignment = .left
+        rightButton.sizeToFit()
+        let barBT: UIBarButtonItem = UIBarButtonItem.init(customView: rightButton)
+        
+        let rightButton2 = UIButton.init(type: UIButton.ButtonType.custom)
+        //        rightButton2.accessibilityIdentifier = "com.yealink.videophone:id/title_rl_left2"
+        rightButton2.setTitle(text, for: UIControl.State.normal)
+        //        rightButton2.addtargetYL(self, action: #selector(returnCurrentController))
+        rightButton2.addTarget(self, action: #selector(returnCurrentController), for: .touchUpInside)
+        rightButton2.setTitleColor(type.getColor(), for: UIControl.State.normal)
+        rightButton2.setTitleColor(UIColor.lightGray, for: UIControl.State.highlighted)
+        rightButton2.titleLabel?.font = UIFont.fontWithHelvetica(mm_kFontSizeLarge)
+        rect = text.boundingRect(with: CGSize(width: 1000, height: 44), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.fontWithHelvetica(mm_kFontSizeLarge)], context: nil)
+        if rect.size.width<40 {
+            rect.size.width = 40
+        }
+        rightButton2.frame = CGRect(x: 0, y: 0, width: rect.size.width, height: 44)
+        rightButton2.contentHorizontalAlignment = .left
+        rightButton2.sizeToFit()
+        let barBT2: UIBarButtonItem = UIBarButtonItem.init(customView: rightButton2)
+        barBT.accessibilityIdentifier = "com.yealink.videophone:id/title_rl_left"
+        barBT2.accessibilityIdentifier = "com.yealink.videophone:id/title_rl_leftClose"
+        navigationItem.setLeftBarButtonItems([barBT, barBT2], animated: true)
+    }
+    
+    //创建图片+文字返回按钮
+    @discardableResult func addLeftReturnAndTitleButton(_ type: MMNavigationbarTitleType = MMNavigationbarTitleType.blue, _ hideText: Bool = false, _ hideImage: Bool = false, _ titleText: String? = nil, _ imageName: String? = nil) -> UIButton {
+        navigationItem.leftBarButtonItem = nil
+        
+        let rightButton = UIButton.init(type: UIButton.ButtonType.custom)
+        //        rightButton.accessibilityIdentifier = "com.yealink.videophone:id/title_rl_left"
+        var newhideText = ""
+        if hideText == false {
+            newhideText = (titleText == nil ? MMLanguage.localized("Back") : titleText ?? "")
+            rightButton.setTitle(newhideText, for: UIControl.State.normal)
+            rightButton.titleLabel?.font = UIFont.fontWithHelvetica(mm_kFontSizeLarge)
+            switch type {
+            case .white:
+                
+                rightButton.setTitleColor(UIColor.white, for: .normal)
+            case .black:
+                
+                rightButton.setTitleColor(UIColor.black, for: .normal)
+            case .blue:
+                rightButton.setTitleColor(UIColor.textBlueColor, for: .normal)
+            }
+        }
+        if hideImage == false, let image = UIImage.init(named: imageName == nil ? getReturnImageName(type: type) : imageName ?? "" ) {
+            rightButton.setImage(image, for: UIControl.State.normal)
+        }
+        rightButton.addTarget(self, action: #selector(closeCurrentController), for: .touchUpInside)
+        
+        rightButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
+        rightButton.sizeToFit()
+        let barBT: UIBarButtonItem = UIBarButtonItem.init(customView: rightButton)
+        
+        barBT.accessibilityIdentifier = "com.yealink.videophone:id/title_rl_left"
+        navigationItem.leftBarButtonItem = barBT
+        
+        return rightButton
+    }
+    
+    /**
+     返回
+     */
+    @objc func addLeftReturnButton() -> Void{
+        MMLOG.info("重置返回按钮")
+        navigationItem.leftBarButtonItems = []
+        
+        navigationItem.setLeftBarButton(createImageButtonItem("nav_icon_back_normal", action: #selector(closeCurrentController),direction:UIControl.ContentHorizontalAlignment.left, size: CGSize(width: 100, height: 44)), animated: true)
+        if let btn = navigationItem.leftBarButtonItem?.customView as? UIButton {
+            btn.setTitle(MMLanguage.localized("返回"), for: UIControl.State.highlighted)
+        }
+    }
+    //左侧关闭按钮
+    func addLeftCloseButton() -> Void {
+        navigationItem.leftBarButtonItem = createImageButtonItem("General_CloseReturn", action: #selector(closeCurrentController),direction:UIControl.ContentHorizontalAlignment.left)
+    }
+    
+    //左侧自定义文字按钮
+    func addLeftTitleButton(title: String, titleColor: UIColor) -> Void {
+        navigationItem.leftBarButtonItem = createTextButton(MMLanguage.localized( title), action:
+            #selector(closeCurrentController), titleColor, .left)
     }
 }
